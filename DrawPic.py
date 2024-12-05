@@ -21,7 +21,7 @@ class DrawPic:
         use_seaborn=True,
         seaborn_style="whitegrid",
         default_save=True,
-        default_show=True,
+        default_show=False,
     ):
         self.xlabel = xlabel
         self.ylabel = ylabel
@@ -158,6 +158,8 @@ class DrawPic:
         if equal_aspect:
             ax.set_aspect("equal", adjustable="box")
         if save and save_path:
+            directory = os.path.dirname(save_path)
+            create_directory(directory)
             plt.savefig(save_path, dpi=300)
         if show:
             plt.show()
@@ -210,7 +212,8 @@ class DrawPic:
         equal_aspect=False,
         colors=None,
         save=None,
-        show=None
+        show=None,
+        s=1.0
     ):
         if figsize is None:
             figsize = self.default_figsize
@@ -226,7 +229,7 @@ class DrawPic:
         for i in range(0, len(args), 4):
             x, y, z, label = args[i], args[i + 1], args[i + 2], args[i + 3]
             color = colors[i // 4 % len(colors)]
-            ax.scatter(x, y, z, label=label, color=color)
+            ax.scatter(x, y, z, label=label, color=color,s=s)
         ax.set_xlabel(xlabel if xlabel else self.xlabel)
         ax.set_ylabel(ylabel if ylabel else self.ylabel)
         ax.set_zlabel(self.zlabel)
@@ -309,6 +312,8 @@ class DrawPic:
         if equal_aspect:
             ax.set_aspect("equal", adjustable="box")
         if save_path and save:
+            directory = os.path.dirname(save_path)
+            create_directory(directory)
             plt.savefig(save_path, dpi=300)
         if show:
             plt.show()
