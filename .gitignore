@@ -1,3 +1,11 @@
+# python file to draw file use DrawPic
+ResSPP.py
+ResSPPQ.py
+
+
+# txt file
+*.txt
+
 # Pictre program draw
 *.png
 
