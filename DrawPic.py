@@ -1,4 +1,4 @@
-# @Time    : 12/2/2024
+# @Time    : 12/5/2024
 # @Author  : wzyang
 # @File    : DrawPic.py
 import matplotlib.pyplot as plt
@@ -16,13 +16,14 @@ class DrawPic:
         xlabel="X-axis",
         ylabel="Y-axis",
         zlabel="Z-axis",
+        figsize=(16, 9),
         use_seaborn=True,
         seaborn_style="whitegrid",
     ):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.zlabel = zlabel
-        self.default_figsize = (16, 9)
+        self.default_figsize = figsize
         self.default_colors = ["#8891DB", "#C7988C", "#A5C496"]
         self.use_seaborn = use_seaborn
         self.seaborn_style = seaborn_style
@@ -50,6 +51,7 @@ class DrawPic:
     ):
         if figsize is None:
             figsize = self.default_figsize
+
         fig, ax = plt.subplots(figsize=figsize)
         if colors is None:
             colors = self.default_colors
@@ -228,6 +230,28 @@ class DrawPic:
         if show:
             plt.show()
 
+    def plot_scatter_colored(
+        self, *args, save_path=None, figsize=None, equal_aspect=False, show=True
+    ):
+        if figsize is None:
+            figsize = self.default_figsize
+
+        fig, ax = plt.subplots(figsize=figsize)
+        for i in range(0, len(args), 4):
+            x, y, z, label = args[i], args[i + 1], args[i + 2], args[i + 3]
+            sc = ax.scatter(x, y, c=z, cmap="viridis", label=label)
+            ax.set_xlabel(self.xlabel)
+            ax.set_ylabel(self.ylabel)
+            ax.legend()
+            cbar = plt.colorbar(sc, ax=ax)
+            cbar.set_label(self.zlabel)
+        if equal_aspect:
+            ax.set_aspect("equal", adjustable="box")
+        if save_path:
+            plt.savefig(save_path, dpi=300)
+        if show:
+            plt.show()
+
 
 def create_directory(directory):
     """Creat Directory
@@ -240,6 +264,7 @@ def create_directory(directory):
 
 
 def test_DrawPic():
+    """test draw picture class"""
     x1 = [1, 2, 3, 4, 5]
     y1 = [2, 3, 5, 7, 11]
     x2 = [1, 2, 3, 4, 5]
@@ -254,6 +279,16 @@ def test_DrawPic():
 
     plotter = DrawPic(
         xlabel="X", ylabel="Y", zlabel="Z", use_seaborn=True, seaborn_style="darkgrid"
+    )
+
+    plotter.plot_scatter_colored(
+        x1,
+        y1,
+        z1,
+        "3D Line 1",
+        save_path="pic/test_3d_line3.png",
+        figsize=(10, 6),
+        equal_aspect=False,
     )
 
     # 测试 plot_line 方法
