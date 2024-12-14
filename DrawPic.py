@@ -4,8 +4,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sns
 import pandas as pd
 import numpy as np
-from .DrawPic2D import DrawPic2D
-from .DrawPic3D import DrawPic3D
+from DrawPic2D import DrawPic2D
+from DrawPic3D import DrawPic3D
 
 class DrawPic(DrawPic2D, DrawPic3D):
     """Python draw picture class"""
