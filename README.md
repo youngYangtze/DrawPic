@@ -100,10 +100,14 @@ plotter.plot_3d_bar(x1, y1, z1, dx, dy, "3D Bar 1", save_path="pic/3d_bar.png")
 ### 叠加绘图 🔄
 
 ```python
-fig, ax = plt.subplots(figsize=(10, 6))
-plotter.plot_line(x1, y1, "Line 1", ax=ax, show=False)
+x1 = [1, 2, 3, 4, 5]
+y1 = [2, 3, 5, 7, 11]
+x2 = [1, 2, 3, 4, 5]
+y2 = [1, 4, 6, 8, 10]
+
+ax = plotter.plot_line(x1, y1, "Line 1", show=False)
 plotter.plot_scatter(x2, y2, "Scatter 2", ax=ax, colors=["#FF5733"], show=False)
-fig.savefig("pic/overlay.png")
+ax.figure.savefig("pic/overlay.png")
 ```
 
 ## 测试 🧪
