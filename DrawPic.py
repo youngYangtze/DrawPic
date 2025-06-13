@@ -4,8 +4,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sns
 import pandas as pd
 import numpy as np
-from DrawPic2D import DrawPic2D
-from DrawPic3D import DrawPic3D
+from DrawPic.DrawPic2D import DrawPic2D
+from DrawPic.DrawPic3D import DrawPic3D
 
 class DrawPic(DrawPic2D, DrawPic3D):
     """Python draw picture class"""
@@ -15,13 +15,13 @@ class DrawPic(DrawPic2D, DrawPic3D):
         xlabel: str = "X-axis",
         ylabel: str = "Y-axis",
         zlabel: str = "Z-axis",
-        figsize: tuple = (16, 9),
+        figsize: tuple = (16, 3),
         use_seaborn: bool = True,
         seaborn_style: str = "whitegrid",
         default_save: bool = True,
         default_show: bool = True,
-        xlabel_fontsize: int = 14,
-        ylabel_fontsize: int = 14,
+        xlabel_fontsize: int = 25,
+        ylabel_fontsize: int = 25,
     ):
         """初始化绘图类
 
@@ -41,7 +41,7 @@ class DrawPic(DrawPic2D, DrawPic3D):
         self.ylabel = ylabel
         self.zlabel = zlabel
         self.default_figsize = figsize
-        self.default_colors = ["#8891DB", "#C7988C", "#A5C496"]
+        self.default_colors = ["#8891DB", "#C7988C", "#A5C496", "#F9C784", "#A5C4E1", "#C4A5E1"]
         self.use_seaborn = use_seaborn
         self.seaborn_style = seaborn_style
         self.default_save = default_save

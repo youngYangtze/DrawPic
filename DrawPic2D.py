@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 class DrawPic2D:
     """2D 绘图方法"""
@@ -46,7 +47,13 @@ class DrawPic2D:
         ax.grid(True)
         if equal_aspect:
             ax.set_aspect("equal", adjustable="box")
+       
         if save and save_path and fig is not None:
+            # 获取保存路径的目录部分
+            save_dir = os.path.dirname(save_path)
+            # 如果目录不存在，则创建目录
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
             fig.savefig(save_path, dpi=300)
         if show and fig is not None:
             plt.show()
